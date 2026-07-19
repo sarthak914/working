@@ -32,7 +32,7 @@ export default function ContactPage() {
           >
             <div className="space-y-stack-md">
               <h1 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg max-w-md font-bold leading-none">
-                Let's build something great
+                Let&apos;s build something great
               </h1>
               <div className="space-y-12 pt-12">
                 <div className="space-y-4">

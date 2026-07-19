@@ -4,6 +4,20 @@
 :root {
   --background: #f9f9f9;
   --foreground: #1a1c1c;
+
+  /* Scope visual environment tokens */
+  --scope-dark: #080808;
+  --scope-dark-secondary: #0e0e0e;
+  --scope-light: #F2F0EA;
+  --scope-light-secondary: #ECEAE3;
+  --scope-off-white: #E8E6DF;
+  --scope-text-on-dark: rgba(242, 240, 234, 0.92);
+  --scope-text-on-dark-muted: rgba(242, 240, 234, 0.45);
+  --scope-text-on-light: #0e0e0e;
+  --scope-text-on-light-muted: #555250;
+
+  /* Diamond colour */
+  --scope-diamond-faint: rgba(242, 240, 234, 0.04);
 }
 
 @theme {
@@ -68,6 +82,10 @@
   --radius-xl: 0.75rem;
   --radius-full: 9999px;
 }
+
+/* ============================================================
+   TYPOGRAPHY UTILITIES
+   ============================================================ */
 
 @utility font-display-xl {
   font-family: var(--font-geist-sans), sans-serif;
@@ -134,6 +152,10 @@
   text-transform: uppercase;
 }
 
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+
 body {
   background: var(--color-background);
   color: var(--color-on-background);
@@ -148,7 +170,51 @@ body {
   vertical-align: middle;
 }
 
-/* Custom premium transitions & layout adjustments */
+/* ============================================================
+   HERO SECTION STYLES
+   ============================================================ */
+
+/* Fluid hero headline: scales from 48px mobile → 160px large desktop */
+.hero-headline {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: clamp(3rem, 10vw, 10rem);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+/* "SCOPE." receives subtle extra character-spacing for dominance */
+.hero-headline-scope {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: clamp(3rem, 10vw, 10rem);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+
+/* Manifesto typography */
+.manifesto-headline {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: clamp(2rem, 5vw, 5.5rem);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.manifesto-headline-strong {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-size: clamp(2.2rem, 5.5vw, 6rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+/* ============================================================
+   GLASS / LEGACY UTILITIES
+   ============================================================ */
+
 .glass-nav {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -159,7 +225,10 @@ body {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Hide scrollbar utility */
+/* ============================================================
+   SCROLLBAR UTILITIES
+   ============================================================ */
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -168,7 +237,10 @@ body {
   scrollbar-width: none;
 }
 
-/* scrolling logos ticker animation */
+/* ============================================================
+   SCROLLING LOGOS TICKER
+   ============================================================ */
+
 @utility scrolling-logos-container {
   display: flex;
   width: max-content;
@@ -176,10 +248,24 @@ body {
 }
 
 @keyframes scroll-logos {
-  0% {
-    transform: translateX(0);
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   PREFERS REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  /* Scope to CSS-driven motion only — avoid breaking Framer Motion transitions. */
+  .scrolling-logos-container {
+    animation: none;
   }
-  100% {
-    transform: translateX(-50%);
+
+  .hero-cta-primary::before,
+  .hero-cta-arrow,
+  .nav-cta-arrow,
+  .scope-nav-link > span[aria-hidden] {
+    transition: none;
   }
 }

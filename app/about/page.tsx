@@ -79,7 +79,7 @@ export default function AboutPage() {
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="font-body-lg text-body-lg text-on-surface-variant"
             >
-              We don't just build websites; we create digital legacies. Based in the heart of London, Scope is a boutique digital agency dedicated to the intersection of minimalist aesthetics and high-performance engineering.
+              We don&apos;t just build websites; we create digital legacies. Based in the heart of London, Scope is a boutique digital agency dedicated to the intersection of minimalist aesthetics and high-performance engineering.
             </motion.p>
           </div>
         </div>

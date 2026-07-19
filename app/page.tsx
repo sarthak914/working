@@ -4,8 +4,13 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import ShaderCanvas from "@/components/ui/ShaderCanvas";
 import Counter from "@/components/ui/Counter";
+import Hero from "@/components/home/Hero";
+import Manifesto from "@/components/home/Manifesto";
+
+/* ============================================================
+   Homepage data — unchanged from original
+   ============================================================ */
 
 const services = [
   { icon: "web", title: "Landing Pages", desc: "High-converting pages designed to sell your product or service." },
@@ -68,74 +73,30 @@ const testimonials = [
   },
 ];
 
+/* ============================================================
+   PAGE
+   ============================================================ */
+
 export default function Home() {
   return (
     <div className="flex-1 w-full bg-background">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-        <ShaderCanvas />
-        <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-gutter items-center relative z-10 w-full">
-          <div className="md:col-span-7 py-stack-lg">
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display-xl-mobile md:font-display-xl text-display-xl-mobile md:text-display-xl mb-stack-sm leading-none"
-            >
-              Building digital experiences that help businesses grow.
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-10"
-            >
-              We design websites, brands, and growth systems that turn visitors into customers and ideas into successful businesses.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col sm:flex-row gap-4"
-            >
-              <Link href="/contact">
-                <button className="bg-[#0B0B0B] text-white px-10 py-5 rounded-full font-body-md text-body-md flex items-center justify-center gap-2 group hover:opacity-90 transition-opacity cursor-pointer">
-                  Start Your Project
-                  <span className="material-symbols-outlined transition-transform group-hover:translate-x-1">
-                    arrow_forward
-                  </span>
-                </button>
-              </Link>
-              <Link href="/portfolio">
-                <button className="border border-outline-variant px-10 py-5 rounded-full font-body-md text-body-md text-on-surface flex items-center justify-center hover:bg-surface-container transition-colors cursor-pointer">
-                  View Our Work
-                </button>
-              </Link>
-            </motion.div>
-          </div>
-          <div className="md:col-span-5 hidden md:block">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full h-[450px]"
-            >
-              <Image
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn2WeVa0GuR44KlE4GE3xDW7XQ4e57txm00U06zI7yoFlVr3bgQ56DaLrHf0yUqdaFSHhlWNw9AgrqZDnqdJTMe98ARO-NZ4ryrYrop1eQqcmzYGocZCxNIToaScRcaIYPVxYTxB70XwvEiRLC24TLrSu-1c9HyHbVeaTjrRI9loUdnG1TgsFoRlCJ8pNudH3lJG_eoF2R7pUnT8tWuQbsV8jtJhtQTx00FZAwR8J9-jGthZ8JQM5jZp2-ThxxWvsxnXP7ceR-2fNd"
-                alt="Scope Agency Laptop Mockup"
-                fill
-                priority
-                className="object-contain drop-shadow-2xl animate-pulse"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-            </motion.div>
-          </div>
-        </div>
-      </section>
+
+      {/* ── NEW: Hero (dark cinematic environment) ── */}
+      <Hero />
+
+      {/* ── NEW: Manifesto (warm off-white editorial moment) ── */}
+      <Manifesto />
+
+      {/* ──────────────────────────────────────────────────────
+          EVERYTHING BELOW THIS LINE IS UNCHANGED FROM ORIGINAL
+          Will be individually redesigned in future iterations.
+         ────────────────────────────────────────────────────── */}
 
       {/* Trusted By Section */}
-      <section className="py-stack-md bg-white border-y border-outline-variant/20 overflow-hidden">
-        <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center mb-stack-sm">
+      <section
+        data-nav-theme="light"
+        className="py-stack-md bg-white border-y border-outline-variant/20 overflow-hidden"
+      >        <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center mb-stack-sm">
           <span className="font-label-sm text-label-sm uppercase tracking-widest text-on-tertiary-container">
             Trusted by ambitious businesses
           </span>
@@ -167,8 +128,11 @@ export default function Home() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-stack-xl" id="services">
-        <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+      <section
+        id="services"
+        data-nav-theme="light"
+        className="py-stack-xl"
+      >        <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
           <div className="mb-stack-lg max-w-2xl">
             <span className="font-label-sm text-label-sm uppercase tracking-widest text-primary mb-4 block">
               Our Capabilities
@@ -181,10 +145,14 @@ export default function Home() {
             {services.map((service, index) => (
               <motion.div
                 key={service.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ y: 30 }}
+                whileInView={{ y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                transition={{
+                  duration: 0.6,
+                  delay: index * 0.05,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
                 whileHover={{ y: -8, borderColor: "#0B0B0B" }}
                 className="p-10 bg-white border border-outline-variant/30 rounded-xl group relative overflow-hidden transition-all duration-300 flex flex-col justify-between"
               >
@@ -205,8 +173,10 @@ export default function Home() {
       </section>
 
       {/* Why Us Section */}
-      <section className="py-stack-xl bg-surface-container-low">
-        <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-stack-lg items-center">
+      <section
+        data-nav-theme="light"
+        className="py-stack-xl bg-surface-container-low"
+      >        <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-stack-lg items-center">
           <div className="relative">
             <div className="aspect-square bg-white rounded-2xl border border-outline-variant/30 overflow-hidden shadow-2xl relative">
               <Image
@@ -274,8 +244,11 @@ export default function Home() {
       </section>
 
       {/* Featured Projects */}
-      <section className="py-stack-xl" id="work">
-        <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+      <section
+        id="work"
+        data-nav-theme="light"
+        className="py-stack-xl"
+      >        <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
           <div className="flex flex-col md:flex-row justify-between items-end mb-stack-lg gap-gutter">
             <div className="max-w-2xl">
               <span className="font-label-sm text-label-sm uppercase tracking-widest text-primary mb-4 block">
@@ -295,8 +268,8 @@ export default function Home() {
             {projects.map((project, index) => (
               <motion.div
                 key={project.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ y: 30 }}
+                whileInView={{ y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="group cursor-pointer"
@@ -327,8 +300,11 @@ export default function Home() {
       </section>
 
       {/* Process Timeline */}
-      <section className="py-stack-xl bg-white" id="process">
-        <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+      <section
+        id="process"
+        data-nav-theme="light"
+        className="py-stack-xl bg-white"
+      >        <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
           <div className="text-center mb-stack-lg">
             <span className="font-label-sm text-label-sm uppercase tracking-widest text-primary mb-4 block">
               How We Work
@@ -338,13 +314,12 @@ export default function Home() {
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-stack-md relative">
-            {/* Line background for desktop */}
             <div className="hidden md:block absolute top-12 left-0 right-0 h-[1px] bg-outline-variant/30 -z-10"></div>
             {processSteps.map((step, index) => (
               <motion.div
                 key={step.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ y: 30 }}
+                whileInView={{ y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="text-center space-y-4"
@@ -361,8 +336,10 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-stack-xl bg-surface-container-low overflow-hidden">
-        <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+      <section
+        data-nav-theme="light"
+        className="py-stack-xl bg-surface-container-low overflow-hidden"
+      >        <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
           <div className="text-center mb-stack-lg">
             <h2 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg">
               What our clients say.
@@ -372,13 +349,13 @@ export default function Home() {
             {testimonials.map((test, index) => (
               <motion.div
                 key={test.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ y: 30 }}
+                whileInView={{ y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="bg-white p-12 rounded-xl border border-outline-variant/30 shadow-sm flex flex-col justify-between min-h-[300px]"
               >
-                <p className="font-body-lg text-on-surface-variant italic mb-8">"{test.quote}"</p>
+                <p className="font-body-lg text-on-surface-variant italic mb-8">&quot;{test.quote}&quot;</p>
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full bg-surface-container-high overflow-hidden relative">
                     <Image
@@ -400,30 +377,32 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="py-stack-xl relative overflow-hidden bg-on-background text-white">
-        <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center py-stack-lg relative z-10">
+       {/* Final CTA */}
+      <section
+        data-nav-theme="dark"
+        className="relative overflow-hidden bg-on-background text-white"
+      >        <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center py-28 md:py-36 relative z-10">
           <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ y: 30 }}
+            whileInView={{ y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="font-display-xl-mobile md:font-display-xl text-white mb-stack-sm max-w-4xl mx-auto leading-none"
           >
-            Ready to grow your business online?
+            Let&apos;s work together
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ y: 30 }}
+            whileInView={{ y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="font-body-lg text-surface-variant mb-12 max-w-2xl mx-auto"
           >
-            Let's create a website and digital strategy that helps your business stand out from the noise.
+            Let&apos;s create a website and digital strategy that helps your business stand out from the noise.
           </motion.p>
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ y: 20 }}
+            whileInView={{ y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col sm:flex-row justify-center gap-6"

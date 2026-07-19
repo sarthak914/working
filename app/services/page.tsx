@@ -55,10 +55,6 @@ export default function ServicesPage() {
         <div className="grid grid-cols-12 gap-gutter">
           {/* Main Feature */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             whileHover={{ scale: 1.005, borderColor: "#0B0B0B" }}
             className="col-span-12 lg:col-span-7 bg-white border border-outline-variant/30 rounded-xl overflow-hidden p-6 md:p-10 flex flex-col justify-between min-h-[500px] transition-all duration-300"
           >
@@ -74,7 +70,7 @@ export default function ServicesPage() {
             <div className="mt-8">
               <h3 className="font-headline-md text-2xl font-bold mb-4">Visual Architecture</h3>
               <p className="font-body-md text-body-md text-on-surface-variant max-w-lg mb-8">
-                Crafting high-fidelity interfaces that prioritize clarity and emotional resonance. Our design philosophy is rooted in the "Quiet Confidence" of minimalism.
+                Crafting high-fidelity interfaces that prioritize clarity and emotional resonance. Our design philosophy is rooted in the &quot;Quiet Confidence&quot; of minimalism.
               </p>
               <div className="flex flex-wrap gap-2">
                 <span className="px-3 py-1 bg-surface-container rounded-full font-label-sm text-xs">UI/UX Design</span>
@@ -100,7 +96,7 @@ export default function ServicesPage() {
                   <span className="font-headline-md text-2xl text-outline/30 font-bold">A</span>
                   <div>
                     <h5 className="font-body-md font-semibold text-base">Immersion</h5>
-                    <p className="font-body-md text-on-surface-variant">Deep diving into your brand's core values and market positioning.</p>
+                    <p className="font-body-md text-on-surface-variant">Deep diving into your brand&apos;s core values and market positioning.</p>
                   </div>
                 </li>
                 <li className="flex gap-4">
@@ -224,7 +220,7 @@ export default function ServicesPage() {
             <div className="col-span-12 md:col-span-6 p-8 md:p-12 flex flex-col justify-center">
               <h3 className="font-headline-lg-mobile md:text-4xl font-bold mb-6">Data-Driven Vision</h3>
               <p className="font-body-lg text-body-lg text-on-surface-variant mb-12">
-                Strategy is the bridge between creativity and commerce. We analyze market gaps to position your brand where it can't be ignored.
+                Strategy is the bridge between creativity and commerce. We analyze market gaps to position your brand where it can&apos;t be ignored.
               </p>
               <div className="grid grid-cols-2 gap-8">
                 <div>
