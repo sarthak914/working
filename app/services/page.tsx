@@ -94,20 +94,35 @@ export default function ServicesPage() {
               whileHover={{ scale: 1.005, borderColor: "#0B0B0B" }}
               className="bg-white border border-outline-variant/30 rounded-xl p-8 flex-1 transition-all duration-300"
             >
-              <h4 className="font-label-sm text-label-sm text-on-tertiary-container mb-4">PROCESS</h4>
-              <ul className="space-y-6">
+              <h4 className="font-label-lg font-bold text-label-sm text-on-tertiary-container mb-4">PROCESS</h4>
+              <br/>
+              <ul className="space-y-8">
                 <li className="flex gap-4">
                   <span className="font-headline-md text-2xl text-outline/30 font-bold">A</span>
                   <div>
-                    <h5 className="font-body-md font-semibold text-base">Immersion</h5>
-                    <p className="font-body-md text-on-surface-variant">Deep diving into your brand's core values and market positioning.</p>
+                    <h5 className="font-body-md font-semibold text-base">Discover</h5>
+                    <p className="font-body-md text-on-surface-variant">Understand the client's business, audience and objectives</p>
                   </div>
                 </li>
                 <li className="flex gap-4">
                   <span className="font-headline-md text-2xl text-outline/30 font-bold">B</span>
                   <div>
-                    <h5 className="font-body-md font-semibold text-base">Iteration</h5>
-                    <p className="font-body-md text-on-surface-variant">Rapid prototyping and refinement through relentless testing.</p>
+                    <h5 className="font-body-md font-semibold text-base">Design</h5>
+                    <p className="font-body-md text-on-surface-variant">Create intuitive, premium and conversation-focus user experiences.</p>
+                  </div>
+                </li>
+                <li className="flex gap-4">
+                  <span className="font-headline-md text-2xl text-outline/30 font-bold">C</span>
+                  <div>
+                    <h5 className="font-body-md font-semibold text-base">Develop</h5>
+                    <p className="font-body-md text-on-surface-variant">Build fast, scalable and responsive digital products.</p>
+                  </div>
+                </li>
+                <li className="flex gap-4">
+                  <span className="font-headline-md text-2xl text-outline/30 font-bold">D</span>
+                  <div>
+                    <h5 className="font-body-md font-semibold text-base">Launch</h5>
+                    <p className="font-body-md text-on-surface-variant">Test, Deploy and Optimize for long term performance.</p>
                   </div>
                 </li>
               </ul>

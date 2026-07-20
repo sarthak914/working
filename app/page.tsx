@@ -8,35 +8,10 @@ import ShaderCanvas from "@/components/ui/ShaderCanvas";
 import Counter from "@/components/ui/Counter";
 
 const services = [
-  { icon: "web", title: "Landing Pages", desc: "High-converting pages designed to sell your product or service." },
   { icon: "business", title: "Business Websites", desc: "Professional corporate sites that build authority and trust." },
   { icon: "shopping_bag", title: "E-commerce", desc: "Scalable online stores built with Shopify and custom solutions." },
   { icon: "trending_up", title: "SEO", desc: "Strategic optimization to rank your business on top of Google." },
   { icon: "share", title: "Social Media", desc: "Visual storytelling and content strategy for digital growth." },
-  { icon: "palette", title: "Branding", desc: "Logo design, visual identity, and brand guidelines for winners." },
-  { icon: "location_on", title: "Google Business", desc: "Local optimization to drive more foot traffic and reviews." },
-  { icon: "build", title: "Maintenance", desc: "Ongoing support and security for your digital investment." },
-];
-
-const projects = [
-  {
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCWZ-ihqu-SmGxhSHNCm9BAcHkaZD2Ri6dYudBgmtWFy-DJEJSPQCV_54sZ01uHT7vpPFjvnP3513TQOb0YMtIn8MnGlaaeHbrP9fpL7hnYmzMLZSX4Yc_N6FB6NsstdLxeLTashE6Q67ZzlojtGGBFTTsXviu4ZO3VeWBQJWUmdcrEPFC8o-NZbVUYJz46_FMznJa3L0JQNjYfcaQXTx8CnRGacd8b3Sg3yetHQNO-weIw_5E8yuQBRt5eUfD49EoBup1glZ3pS0uX",
-    category: "E-commerce • Skincare",
-    title: "Lumina Essentials",
-    desc: "Elevating digital presence with bespoke design and performance.",
-  },
-  {
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAngA-1fvkWVJTi_m_yMyKbpQuLZ5fDzg6q7DWPRYkRqzHKe_NRSxJDDpj5Uock20TSTKIiBSCfO993REBtguqb1XBldB9q-SXzEfsMvGMGkLI0quH4Pb7zY2Hg8UxTR4A8mJYeQxNKblVR1MFmCzD7X0zZAccXJWT3oMxB02saGy0j_1ps1_tc2RPuVRdPfsJ_xBbiOweCOOmcpRL__-j6Ceop7WgnXnBYmovqzIzScPr_duc2mvzNnMCqd6MCd1JKp4BmQrTY9mI_",
-    category: "SaaS • Fintech",
-    title: "Nexus Finance",
-    desc: "Revolutionizing user onboarding for complex data ecosystems.",
-  },
-  {
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDVy672WuN2a-LtxJ0_17TXJOM8B_hEBAviHNB8MawCQgYETfBiYKO5s_JwckIiYez8mJUyRH7rgITTjaKjdSz_XDno1617WbyWyh0p3qD4hYrmcxP__cM5bF-ahYtFKnscS4EsZuMVyjl-BGLNjZel9aRXJpuff0UXszTMFirPdXiNLu0GS5uMvGTKykknVPYbQY5mOPFSo8i7oC3Pkeffp6rLMHkt_nRb0Wn8o3Bb-JMkmVnzAGAEbrXFNBAqRGEYPe34DEyTc5UU",
-    category: "Branding • Architecture",
-    title: "Structure Collective",
-    desc: "Translating physical spaces into a high-end digital experience.",
-  },
 ];
 
 const processSteps = [
@@ -273,58 +248,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Projects */}
-      <section className="py-stack-xl" id="work">
-        <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-stack-lg gap-gutter">
-            <div className="max-w-2xl">
-              <span className="font-label-sm text-label-sm uppercase tracking-widest text-primary mb-4 block">
-                Portfolio
-              </span>
-              <h2 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg leading-tight">
-                Selected works for leading brands.
-              </h2>
-            </div>
-            <Link href="/portfolio">
-              <button className="border border-outline-variant px-8 py-3 rounded-full font-body-md text-body-md text-on-surface hover:bg-surface-container transition-colors cursor-pointer mb-4">
-                View All Projects
-              </button>
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-            {projects.map((project, index) => (
-              <motion.div
-                key={project.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="group cursor-pointer"
-              >
-                <div className="aspect-[4/5] bg-surface-container-high rounded-xl overflow-hidden mb-6 relative">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-[#0B0B0B]/0 group-hover:bg-[#0B0B0B]/40 transition-colors duration-300 flex items-center justify-center">
-                    <span className="material-symbols-outlined text-white text-5xl opacity-0 group-hover:opacity-100 transition-opacity">
-                      visibility
-                    </span>
-                  </div>
-                </div>
-                <span className="font-label-sm text-label-sm text-on-tertiary-container uppercase tracking-widest block mb-2">
-                  {project.category}
-                </span>
-                <h3 className="font-headline-md text-2xl font-bold mb-2">{project.title}</h3>
-                <p className="font-body-md text-on-surface-variant">{project.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Process Timeline */}
       <section className="py-stack-xl bg-white" id="process">
