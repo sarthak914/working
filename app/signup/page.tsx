@@ -1,9 +1,68 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/navigation";
 
 export default function SignupPage() {
+    const router = useRouter();
+      const { refreshUser } = useAuth();
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  async function handleSignup(
+    event: React.FormEvent<HTMLFormElement>
+  ) {
+    event.preventDefault();
+
+    setError("");
+    setIsLoading(true);
+
+    try {
+      const response = await fetch(
+        "/api/auth/signup",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify({
+            name,
+            email,
+            password,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || "Unable to create account.");
+        return;
+      }
+
+      await refreshUser();
+
+      router.push("/");
+      router.refresh();
+    } catch {
+      setError(
+        "Something went wrong. Please try again."
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  }
+  
   return (
     <main className="min-h-screen flex flex-col md:flex-row bg-white">
       {/* LEFT SIDE */}
@@ -87,7 +146,7 @@ export default function SignupPage() {
           {/* Form */}
           <form
             className="space-y-7"
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={handleSignup}
           >
             {/* Full Name */}
             <div>
@@ -102,6 +161,11 @@ export default function SignupPage() {
                 id="name"
                 name="name"
                 type="text"
+                value={name}
+                onChange={(event) =>
+                  setName(event.target.value)
+                }
+                autoComplete="name"
                 placeholder="John Doe"
                 required
                 className="w-full bg-transparent border-0 border-b border-[#e2e2e2] px-0 pb-4 text-[18px] text-[#1a1c1c] outline-none focus:border-[#0b0b0b] transition-colors placeholder:text-[#747878]"
@@ -121,7 +185,36 @@ export default function SignupPage() {
                 id="email"
                 name="email"
                 type="email"
+                value={email}
+                onChange={(event) =>
+                  setEmail(event.target.value)
+                }
+                autoComplete="email"
                 placeholder="name@agency.com"
+                required
+                className="w-full bg-transparent border-0 border-b border-[#e2e2e2] px-0 pb-4 text-[18px] text-[#1a1c1c] outline-none focus:border-[#0b0b0b] transition-colors placeholder:text-[#747878]"
+              />
+            </div>
+
+            {/* Password */}
+            <div>
+              <label
+                htmlFor="password"
+                className="block mb-3 text-[12px] font-semibold uppercase tracking-[0.05em] text-[#444748]"
+              >
+                Password
+              </label>
+
+              <input
+                id="password"
+                name="password"
+                type="password"
+                value={password}
+                onChange={(event) =>
+                  setPassword(event.target.value)
+                }
+                autoComplete="new-password"
+                placeholder="••••••••"    
                 required
                 className="w-full bg-transparent border-0 border-b border-[#e2e2e2] px-0 pb-4 text-[18px] text-[#1a1c1c] outline-none focus:border-[#0b0b0b] transition-colors placeholder:text-[#747878]"
               />
@@ -164,6 +257,16 @@ export default function SignupPage() {
               </Link>
               .
             </p>
+            
+            {/* Error Message */}
+            {error && (
+              <p
+                role="alert"
+                className="text-[13px] text-red-600"
+              >
+                {error}
+              </p>
+            )}
 
             {/* Create Account */}
             <div className="pt-2">

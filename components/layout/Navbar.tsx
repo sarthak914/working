@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "@/contexts/AuthContext";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -15,6 +16,7 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const { user, isLoading, logout } = useAuth();
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -30,6 +32,11 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleLogout = async () => {
+    await logout();
+    setMobileMenuOpen(false);
+  };
 
   return (
     <>

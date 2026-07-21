@@ -1,9 +1,56 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function LoginPage() {
+    const router = useRouter();
+      const { refreshUser } = useAuth();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  async function handleLogin(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    setError("");
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || "Unable to login.");
+        return;
+      }
+
+      await refreshUser();
+
+      router.push("/");
+      router.refresh();
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
     <main className="min-h-screen flex flex-col md:flex-row bg-white">
       {/* LEFT SIDE */}
@@ -65,7 +112,7 @@ export default function LoginPage() {
           {/* Form */}
           <form
             className="space-y-9"
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={handleLogin}
           >
             {/* Email */}
             <div>
@@ -80,6 +127,9 @@ export default function LoginPage() {
                 id="email"
                 name="email"
                 type="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                autoComplete="email"
                 placeholder="name@agency.com"
                 required
                 className="w-full bg-transparent border-0 border-b border-[#e2e2e2] px-0 pb-4 text-[18px] text-[#1a1c1c] outline-none focus:border-[#0b0b0b] transition-colors placeholder:text-[#747878]"
@@ -108,19 +158,33 @@ export default function LoginPage() {
                 id="password"
                 name="password"
                 type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                autoComplete="current-password"
                 placeholder="••••••••"
                 required
                 className="w-full bg-transparent border-0 border-b border-[#e2e2e2] px-0 pb-4 text-[18px] text-[#1a1c1c] outline-none focus:border-[#0b0b0b] transition-colors placeholder:text-[#0b0b0b]"
               />
             </div>
 
+            {/* Error Message */}
+            {error && (
+              <p
+                role="alert"
+                className="text-[13px] text-red-600"
+              >
+                {error}
+              </p>
+            )}
+
             {/* Sign In */}
             <div className="pt-5">
               <button
                 type="submit"
-                className="w-full rounded-full bg-[#0b0b0b] py-[19px] text-[16px] font-semibold text-white cursor-pointer transition-transform duration-300 hover:scale-[1.015] active:scale-[0.99]"
+                disabled={isLoading}
+                className="w-full rounded-full bg-[#0b0b0b] py-[19px] text-[16px] font-semibold text-white cursor-pointer transition-transform duration-300 hover:scale-[1.015] active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                Sign In
+                {isLoading ? "Signing In..." : "Sign In"}
               </button>
             </div>
           </form>
