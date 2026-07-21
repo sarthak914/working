@@ -11,7 +11,7 @@ export default function ShaderCanvas() {
 
     let animationFrameId: number;
 
-    const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+    const gl = canvas.getContext("webgl");
     if (!gl) {
       console.warn("WebGL not supported in this browser.");
       return;
@@ -54,7 +54,7 @@ export default function ShaderCanvas() {
       }
     `;
 
-    function loadShader(type: number, source: string) {
+    function loadShader(gl: WebGLRenderingContext, type: number, source: string) {
       const shader = gl.createShader(type);
       if (!shader) return null;
       gl.shaderSource(shader, source);
@@ -67,8 +67,8 @@ export default function ShaderCanvas() {
       return shader;
     }
 
-    const vertexShader = loadShader(gl.VERTEX_SHADER, vsSource);
-    const fragmentShader = loadShader(gl.FRAGMENT_SHADER, fsSource);
+    const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vsSource);
+    const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
     if (!vertexShader || !fragmentShader) return;
 
     const program = gl.createProgram();
@@ -105,7 +105,7 @@ export default function ShaderCanvas() {
       if (canvas.width !== displayWidth || canvas.height !== displayHeight) {
         canvas.width = displayWidth;
         canvas.height = displayHeight;
-        gl.viewport(0, 0, canvas.width, canvas.height);
+        gl!.viewport(0, 0, canvas.width, canvas.height);
       }
     }
 
