@@ -16,6 +16,7 @@ export default function ShaderCanvas() {
       console.warn("WebGL not supported in this browser.");
       return;
     }
+    const webgl: WebGLRenderingContext = gl;
 
     // Vertex shader code
     const vsSource = `
@@ -54,7 +55,11 @@ export default function ShaderCanvas() {
       }
     `;
 
-    function loadShader(gl: WebGLRenderingContext, type: number, source: string) {
+    function loadShader(
+      gl: WebGLRenderingContext,
+      type: number,
+      source: string
+    ) {
       const shader = gl.createShader(type);
       if (!shader) return null;
       gl.shaderSource(shader, source);
@@ -67,22 +72,22 @@ export default function ShaderCanvas() {
       return shader;
     }
 
-    const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vsSource);
-    const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
+    const vertexShader = loadShader(webgl, webgl.VERTEX_SHADER, vsSource);
+    const fragmentShader = loadShader(webgl, webgl.FRAGMENT_SHADER, fsSource);
     if (!vertexShader || !fragmentShader) return;
 
-    const program = gl.createProgram();
+    const program = webgl.createProgram();
     if (!program) return;
-    gl.attachShader(program, vertexShader);
-    gl.attachShader(program, fragmentShader);
-    gl.linkProgram(program);
+    webgl.attachShader(program, vertexShader);
+    webgl.attachShader(program, fragmentShader);
+    webgl.linkProgram(program);
 
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
       console.error("Unable to initialize the shader program: " + gl.getProgramInfoLog(program));
       return;
     }
 
-    gl.useProgram(program);
+    webgl.useProgram(program);
 
     // Buffer for full-screen quad positions
     const positionBuffer = gl.createBuffer();
@@ -105,7 +110,7 @@ export default function ShaderCanvas() {
       if (canvas.width !== displayWidth || canvas.height !== displayHeight) {
         canvas.width = displayWidth;
         canvas.height = displayHeight;
-        gl!.viewport(0, 0, canvas.width, canvas.height);
+        webgl!.viewport(0, 0, canvas.width, canvas.height);
       }
     }
 
@@ -117,11 +122,11 @@ export default function ShaderCanvas() {
     resizeCanvas();
 
     function render(time: number) {
-      gl.useProgram(program);
-      if (uTimeLocation) gl.uniform1f(uTimeLocation, time * 0.001);
-      if (uResLocation && canvas) gl.uniform2f(uResLocation, canvas.width, canvas.height);
+      webgl.useProgram(program);
+      if (uTimeLocation) webgl.uniform1f(uTimeLocation, time * 0.001);
+      if (uResLocation && canvas) webgl.uniform2f(uResLocation, canvas.width, canvas.height);
 
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      webgl.drawArrays(webgl.TRIANGLE_STRIP, 0, 4);
       animationFrameId = requestAnimationFrame(render);
     }
 
@@ -130,10 +135,10 @@ export default function ShaderCanvas() {
     return () => {
       cancelAnimationFrame(animationFrameId);
       resizeObserver.disconnect();
-      gl.deleteBuffer(positionBuffer);
-      gl.deleteShader(vertexShader);
-      gl.deleteShader(fragmentShader);
-      gl.deleteProgram(program);
+      webgl.deleteBuffer(positionBuffer);
+      webgl.deleteShader(vertexShader);
+      webgl.deleteShader(fragmentShader);
+      webgl.deleteProgram(program);
     };
   }, []);
 
